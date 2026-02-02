@@ -114,7 +114,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`fixed top-[60px] left-0 w-full bg-white shadow-lg transform transition-all duration-300 ease-in-out lg:hidden z-40 ${
+        className={`fixed top-[45px] left-0 w-full bg-white shadow-lg transform transition-all duration-300 ease-in-out lg:hidden z-40 ${
           isMobileMenuOpen
             ? "translate-y-0 opacity-100"
             : "-translate-y-full opacity-0 pointer-events-none"

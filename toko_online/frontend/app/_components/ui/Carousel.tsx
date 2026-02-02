@@ -62,7 +62,9 @@ const Carousel = ({
     setActiveIndex((prev) => prev + 1);
   };
 
-  const handleTransitionEnd = () => {
+  const handleTransitionEnd = (e: React.TransitionEvent) => {
+    if (e.target !== e.currentTarget) return;
+
     // If we reached the cloned slide (last index), snap back to real first slide (index 0)
     if (activeIndex === extendedSlides.length - 1) {
       setIsTransitioning(false);
@@ -100,11 +102,26 @@ const Carousel = ({
         }}
         onTransitionEnd={handleTransitionEnd}
       >
-        {extendedSlides.map((slide, index) => (
-          <div key={index} className="w-full shrink-0 h-full">
-            {slide}
-          </div>
-        ))}
+        {extendedSlides.map((slide, index) => {
+          // Normalize to handle the clone (index N) being same as index 0
+          const normalizedActiveIndex = activeIndex % slides.length;
+          const normalizedIndex = index % slides.length;
+          const isEffectiveActive = normalizedActiveIndex === normalizedIndex;
+
+          return (
+            <div key={index} className="w-full shrink-0 h-full overflow-hidden">
+              <div
+                className="w-full h-full"
+                style={{
+                  transform: isEffectiveActive ? "scale(1)" : "scale(1.1)",
+                  transition: `transform ${interval}ms ease-out`,
+                }}
+              >
+                {slide}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Dots - Only show original slides count */}
