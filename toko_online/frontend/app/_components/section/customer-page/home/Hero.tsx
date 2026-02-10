@@ -38,7 +38,7 @@ const Hero = () => {
       {/* Carousel Container */}
       <Carousel slides={slides} autoPlay={true} interval={5000} />
       <div className="absolute inset-0 bg-black/30" />
-      <div className="absolute z-10 md:top-40 top-50 md:w-1/3 md:ml-10 md:px-0 px-4">
+      <div className="absolute z-10 md:top-30 top-50 md:w-1/3 md:ml-10 md:px-0 px-4">
         <h1 className="text-white text-sm w-fit bg-blue-900/50 rounded-full border border-white px-4 py-1 text-center font-roboto mb-5">
           SUMMER COLLECTION 2026
         </h1>
@@ -46,7 +46,7 @@ const Hero = () => {
           Step Into Comfort.
         </h1>
         <p className="text-white text-sm">
-          Engineered for the modern movement. Dicovered footwear that balances
+          Engineered for the modern movement. Discovered footwear that balances
           unparalleled cushion with minimalist aesthetics.
         </p>
         <div className="flex font-semibold gap-5 mt-5">

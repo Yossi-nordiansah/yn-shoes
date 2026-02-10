@@ -15,15 +15,12 @@ const BrandSection = () => {
     { name: 'Mizuno', logo: '/images/brands-logo/mizuno-logo.png' },
   ];
 
-  // Duplicate brands for infinite loop effect
-  const duplicatedBrands = [...brands, ...brands];
-
   return (
     <section className="overflow-hidden bg-white py-12">
-      <div className="relative">
-        {/* Scrolling Container */}
-        <div className="flex animate-scroll-left gap-16">
-          {duplicatedBrands.map((brand, index) => (
+      <div className="relative group flex">
+        {/* Scrolling Container 1 */}
+        <div className="flex animate-scroll-left gap-16 pr-16 items-center flex-shrink-0">
+          {brands.map((brand, index) => (
             <div
               key={`${brand.name}-${index}`}
               className="flex min-w-[150px] items-center justify-center grayscale transition-all duration-300 hover:grayscale-0"
@@ -39,9 +36,27 @@ const BrandSection = () => {
           ))}
         </div>
 
+        {/* Scrolling Container 2 (Duplicate) */}
+        <div className="flex animate-scroll-left gap-16 pr-16 items-center flex-shrink-0" aria-hidden="true">
+          {brands.map((brand, index) => (
+            <div
+              key={`${brand.name}-${index}-dup`}
+              className="flex min-w-[150px] items-center justify-center grayscale transition-all duration-300 hover:grayscale-0"
+            >
+              <Image
+                src={brand.logo}
+                alt={`${brand.name} logo`}
+                width={120}
+                height={60}
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </div>
+
         {/* Gradient Overlays */}
-        <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent z-10" />
       </div>
 
       {/* Custom CSS for animation */}
@@ -51,7 +66,7 @@ const BrandSection = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-100%);
           }
         }
 
@@ -59,7 +74,7 @@ const BrandSection = () => {
           animation: scroll-left 30s linear infinite;
         }
 
-        .animate-scroll-left:hover {
+        .group:hover .animate-scroll-left {
           animation-play-state: paused;
         }
       `}</style>
