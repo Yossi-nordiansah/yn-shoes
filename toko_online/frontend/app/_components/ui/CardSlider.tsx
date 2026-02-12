@@ -78,6 +78,8 @@ export default function CardSlider({
   const startX = useRef<number | null>(null);
   const isDragging = useRef(false);
 
+  const [dragOffset, setDragOffset] = useState(0);
+
   /* ===== DOTS COUNT ===== */
   const pageCount = Math.ceil(totalSlides / slidesToScroll);
 
@@ -126,50 +128,73 @@ export default function CardSlider({
   }, [currentIndex, currentSlidesToShow]);
 
   useEffect(() => {
-    if (!enableTransition) {
+    if (!enableTransition && dragOffset === 0) {
       requestAnimationFrame(() => setEnableTransition(true));
     }
-  }, [enableTransition]);
+  }, [enableTransition, dragOffset]);
 
   /* ===== SWIPE & DRAG ===== */
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!swipeToSlide) return;
+    setEnableTransition(false);
+    isDragging.current = true;
     startX.current = e.touches[0].clientX;
   };
 
-  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!swipeToSlide || startX.current === null) return;
-    const diff = startX.current - e.changedTouches[0].clientX;
-    if (diff > 50) next();
-    if (diff < -50) prev();
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!swipeToSlide || !isDragging.current || startX.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - startX.current;
+    setDragOffset(diff);
+  };
+
+  const handleTouchEnd = () => {
+    if (!swipeToSlide || !isDragging.current) return;
+    isDragging.current = false;
+    
+    if (Math.abs(dragOffset) > 50) {
+      if (dragOffset > 0) prev();
+      else next();
+    }
+    
+    setEnableTransition(true);
+    setDragOffset(0);
     startX.current = null;
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!swipeToSlide) return;
+    e.preventDefault();
+    setEnableTransition(false);
     isDragging.current = true;
     startX.current = e.clientX;
-    e.preventDefault();
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!swipeToSlide || !isDragging.current) return;
+    if (!swipeToSlide || !isDragging.current || startX.current === null) return;
     e.preventDefault();
+    const currentX = e.clientX;
+    const diff = currentX - startX.current;
+    setDragOffset(diff);
   };
 
-  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!swipeToSlide || !isDragging.current || startX.current === null) return;
-    const diff = startX.current - e.clientX;
-    if (diff > 50) next();
-    if (diff < -50) prev();
-    startX.current = null;
+  const handleMouseUp = () => {
+    if (!swipeToSlide || !isDragging.current) return;
     isDragging.current = false;
+    
+    if (Math.abs(dragOffset) > 50) {
+      if (dragOffset > 0) prev();
+      else next();
+    }
+
+    setEnableTransition(true);
+    setDragOffset(0);
+    startX.current = null;
   };
 
   const handleMouseLeave = () => {
     if (isDragging.current) {
-      isDragging.current = false;
-      startX.current = null;
+      handleMouseUp();
     }
     if (pauseOnHover) setIsHovering(false);
   };
@@ -178,6 +203,7 @@ export default function CardSlider({
     <div
       className="relative w-full overflow-hidden mx-auto"
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -187,11 +213,10 @@ export default function CardSlider({
       style={{ cursor: swipeToSlide ? "grab" : "default" }}
     >
       {/* SLIDER */}
-      {/* SLIDER */}
       <div
         className="flex"
         style={{
-          transform: `translateX(-${(currentIndex * 100) / currentSlidesToShow}%)`,
+          transform: `translateX(calc(-${(currentIndex * 100) / currentSlidesToShow}% + ${dragOffset}px))`,
           transition: enableTransition
             ? `transform ${speed}ms ease-in-out`
             : "none",
