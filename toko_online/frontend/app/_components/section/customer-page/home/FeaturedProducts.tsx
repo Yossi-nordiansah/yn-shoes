@@ -75,7 +75,7 @@ const FeaturedProducts = () => {
               badge={false}
               badgeColor={product.badgeColor}
               badgeText={product.badge}
-              isWishlist={false}
+              isWishlist={true}
               category={product.category}
             />
           ))}

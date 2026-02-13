@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 type ProductProps = {
   image: string;
   name: string;
@@ -23,6 +26,8 @@ const CardProduct = ({
   isWishlist,
   category,
 }: ProductProps) => {
+  const [liked, setLiked] = useState(isWishlist || false);
+
   return (
     <div className="group cursor-pointer p-2">
       <div className="relative overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
@@ -40,19 +45,22 @@ const CardProduct = ({
         {/* Image Container */}
         <div className="relative flex h-60 w-full items-center justify-center bg-gray-100">
           {/* Wishlist Button */}
-          <div
-            className={
-              "absolute right-3 top-3 z-10" + (isWishlist ? "" : " hidden")
-            }
-          >
-            <button className="rounded-full bg-white p-2 shadow-md hover:bg-gray-50 transition-colors">
+          <div className="absolute right-3 top-3 z-10 opacity-0 transition-all duration-300 group-hover:opacity-100">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setLiked(!liked);
+              }}
+              className="rounded-full bg-white p-2 shadow-md hover:bg-gray-50 transition-colors"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill={isWishlist ? "currentColor" : "none"}
+                fill={liked ? "currentColor" : "none"}
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className={`h-5 w-5 ${isWishlist ? "text-red-500" : "text-gray-400"}`}
+                className={`h-5 w-5 ${liked ? "text-red-500" : "text-gray-400"}`}
               >
                 <path
                   strokeLinecap="round"
