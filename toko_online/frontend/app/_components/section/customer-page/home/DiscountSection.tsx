@@ -1,21 +1,24 @@
 const DiscountSection = () => {
   return (
-    <section className="bg-blue-600 py-16">
-      <div className="container mx-auto px-4 text-center md:px-8 lg:px-16">
-        <h2 className="mb-4 text-4xl font-bold text-white">
-          Student Deals / Discounts
-        </h2>
-        <p className="mb-6 text-lg text-blue-100">
-          Get exclusive discounts on your favorite brands. Limited time offer!
-        </p>
+    <section className="py-8 px-6">
+      <div className="bg-blue-600 shadow-lg py-8 flex container mx-auto justify-between items-center px-4 text-center md:px-8 rounded-xl">
+        <div>
+          <h2 className="text-left text-3xl font-bold text-white">
+            Summer Ready Discounts!
+          </h2>
+          <p className="text-base text-blue-100">
+            Get exclusive discounts on your favorite brands. Limited time offer!
+          </p>
+        </div>
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full rounded-full px-6 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-white sm:w-80"
-          />
-          <button className="w-full rounded-full bg-white px-8 py-3 font-semibold text-blue-600 transition-all hover:bg-gray-100 sm:w-auto">
-            Subscribe
+          <div className="py-1 px-4 rounded-xl flex-1 bg-green-300/20 border border-green-300">
+            <p className="text-left text-[11px] font-semibold text-white mt-1">
+              COUPON CODE
+            </p>
+            <h1 className="text-xl font-bold text-white">SMMRDISC26</h1>
+          </div>
+          <button className="w-full cursor-pointer rounded-xl bg-white px-5 py-3 font-semibold text-blue-600 transition-all hover:bg-gray-100 sm:w-auto">
+            Copy Code
           </button>
         </div>
       </div>

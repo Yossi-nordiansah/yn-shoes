@@ -30,7 +30,7 @@ const CardProduct = ({
 
   return (
     <div className="group cursor-pointer p-2">
-      <div className="relative overflow-hidden w-60 rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
+      <div className="relative overflow-hidden md:w-60 w-96 rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
         {/* Badge */}
         {badge && (
           <div
@@ -43,7 +43,7 @@ const CardProduct = ({
         )}
 
         {/* Image Container */}
-        <div className="relative flex h-60 w-full items-center justify-center bg-white">
+        <div className="relative flex md:h-60 h-96 w-full items-center justify-center bg-white">
           {/* Wishlist Button */}
           <div className="absolute right-3 top-3 z-10 opacity-0 transition-all duration-300 group-hover:opacity-100">
             <button
@@ -78,7 +78,7 @@ const CardProduct = ({
         </div>
 
         {/* Content */}
-        <div className="p-4">
+        <div className="p-4 bg-grey-50">
           <div className="mb-1 text-xs font-medium text-gray-500">
             {category}
           </div>
