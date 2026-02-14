@@ -30,7 +30,7 @@ const CardProduct = ({
 
   return (
     <div className="group cursor-pointer p-2">
-      <div className="relative overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
+      <div className="relative overflow-hidden w-60 rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
         {/* Badge */}
         {badge && (
           <div
@@ -43,7 +43,7 @@ const CardProduct = ({
         )}
 
         {/* Image Container */}
-        <div className="relative flex h-60 w-full items-center justify-center bg-gray-100">
+        <div className="relative flex h-60 w-full items-center justify-center bg-white">
           {/* Wishlist Button */}
           <div className="absolute right-3 top-3 z-10 opacity-0 transition-all duration-300 group-hover:opacity-100">
             <button
@@ -73,13 +73,15 @@ const CardProduct = ({
           <img
             src={image}
             alt={name}
-            className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-110"
+            className="object-contain h-full transition-transform duration-500 group-hover:scale-110"
           />
         </div>
 
         {/* Content */}
         <div className="p-4">
-           <div className="mb-1 text-xs font-medium text-gray-500">{category}</div>
+          <div className="mb-1 text-xs font-medium text-gray-500">
+            {category}
+          </div>
           <h3 className="mb-2 text-lg font-bold text-gray-900 line-clamp-1">
             {name}
           </h3>
@@ -96,15 +98,15 @@ const CardProduct = ({
             </div>
           )}
         </div>
-        
-         {/* Hover Buttons Slide Up */}
+
+        {/* Hover Buttons Slide Up */}
         <div className="flex absolute bottom-0 left-0 right-0 gap-2 bg-white p-4 transition-transform duration-300 translate-y-full group-hover:translate-y-0 shadow-lg">
-            <button className="w-full block rounded-lg bg-blue-600 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700">
-              Add to Cart
-            </button>
-             <button className="w-full block rounded-lg border border-gray-300 bg-white py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600">
-              Buy Now
-            </button>
+          <button className="w-full block rounded-lg bg-blue-600 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700">
+            Add to Cart
+          </button>
+          <button className="w-full block rounded-lg border border-gray-300 bg-white py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600">
+            Buy Now
+          </button>
         </div>
       </div>
     </div>

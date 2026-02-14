@@ -6,7 +6,7 @@ const FeaturedProducts = () => {
       id: 1,
       name: "Nike Air Max",
       price: "IDR 2.500.000",
-      image: "/images/bg-hero1.jpeg",
+      image: "/images/lan.webp",
       badge: "NEW",
       badgeColor: "bg-blue-600",
       rating: 4.8,
@@ -49,7 +49,7 @@ const FeaturedProducts = () => {
   ];
 
   return (
-    <section className="bg-white py-12 md:py-16">
+    <section className="bg-gray-100 py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
