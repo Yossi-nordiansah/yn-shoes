@@ -1,32 +1,33 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const RatingSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'John Doe',
+      name: "John Doe",
       rating: 5,
-      comment: 'Amazing quality and comfort! These are the best shoes I have ever owned.',
-      avatar: '/images/bg-hero1.jpeg',
+      comment:
+        "Amazing quality and comfort! These are the best shoes I have ever owned.",
+      avatar: "/images/bg-hero1.jpeg",
     },
     {
       id: 2,
-      name: 'Jane Smith',
+      name: "Jane Smith",
       rating: 5,
-      comment: 'Perfect fit and great style. Highly recommend to everyone!',
-      avatar: '/images/bg-hero2.png',
+      comment: "Perfect fit and great style. Highly recommend to everyone!",
+      avatar: "/images/bg-hero2.png",
     },
     {
       id: 3,
-      name: 'Mike Johnson',
+      name: "Mike Johnson",
       rating: 4,
-      comment: 'Good product, fast shipping. Will buy again!',
-      avatar: '/images/bg-hero3.png',
+      comment: "Good product, fast shipping. Will buy again!",
+      avatar: "/images/bg-hero3.png",
     },
   ];
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-8">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         <h2 className="mb-8 text-center text-3xl font-bold text-gray-900">
           What Our Customers Say
@@ -48,13 +49,17 @@ const RatingSection = () => {
                   />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                  <h4 className="font-semibold text-gray-900">
+                    {testimonial.name}
+                  </h4>
                   <div className="flex gap-1">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <svg
                         key={i}
                         className={`h-4 w-4 ${
-                          i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'
+                          i < testimonial.rating
+                            ? "text-yellow-400"
+                            : "text-gray-300"
                         }`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
