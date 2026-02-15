@@ -1,7 +1,7 @@
 const DiscountSection = () => {
   return (
     <section className="py-8 px-6">
-      <div className="bg-blue-600 shadow-lg py-8 flex container mx-auto justify-between items-center px-4 text-center md:px-8 rounded-xl">
+      <div className="bg-blue-600 shadow-lg py-8 flex container mx-auto justify-between items-center px-4 text-center md:px-8 rounded-xl flex-col md:flex-row gap-6">
         <div>
           <h2 className="text-left text-3xl font-bold text-white">
             Summer Ready Discounts!
