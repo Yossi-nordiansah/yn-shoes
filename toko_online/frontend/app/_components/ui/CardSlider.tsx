@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ResponsiveSetting {
   sm?: number; // <640px
@@ -96,8 +96,14 @@ export default function CardSlider({
     return Math.floor(realIndex / slidesToScroll);
   };
 
-  const next = () => setCurrentIndex((prev) => prev + slidesToScroll);
-  const prev = () => setCurrentIndex((prev) => prev - slidesToScroll);
+  const next = useCallback(
+    () => setCurrentIndex((prev) => prev + slidesToScroll),
+    [slidesToScroll],
+  );
+  const prev = useCallback(
+    () => setCurrentIndex((prev) => prev - slidesToScroll),
+    [slidesToScroll],
+  );
 
   /* ===== AUTOPLAY ===== */
   useEffect(() => {
@@ -106,7 +112,7 @@ export default function CardSlider({
 
     const interval = setInterval(next, autoplaySpeed);
     return () => clearInterval(interval);
-  }, [autoplaySpeed, isHovering, currentSlidesToShow]);
+  }, [autoplaySpeed, isHovering, currentSlidesToShow, next, pauseOnHover]);
 
   /* ===== INFINITE RESET ===== */
   useEffect(() => {
@@ -125,7 +131,7 @@ export default function CardSlider({
         setCurrentIndex(slides.length - currentSlidesToShow * 2);
       }, speed);
     }
-  }, [currentIndex, currentSlidesToShow]);
+  }, [currentIndex, currentSlidesToShow, infinite, slides.length, speed]);
 
   useEffect(() => {
     if (!enableTransition && dragOffset === 0) {
@@ -151,12 +157,12 @@ export default function CardSlider({
   const handleTouchEnd = () => {
     if (!swipeToSlide || !isDragging.current) return;
     isDragging.current = false;
-    
+
     if (Math.abs(dragOffset) > 50) {
       if (dragOffset > 0) prev();
       else next();
     }
-    
+
     setEnableTransition(true);
     setDragOffset(0);
     startX.current = null;
@@ -181,7 +187,7 @@ export default function CardSlider({
   const handleMouseUp = () => {
     if (!swipeToSlide || !isDragging.current) return;
     isDragging.current = false;
-    
+
     if (Math.abs(dragOffset) > 50) {
       if (dragOffset > 0) prev();
       else next();
@@ -226,7 +232,7 @@ export default function CardSlider({
           <div
             key={index}
             className="flex-shrink-0 px-2"
-            style={{ 
+            style={{
               width: `${100 / currentSlidesToShow}%`,
             }}
           >
