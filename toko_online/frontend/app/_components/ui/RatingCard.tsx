@@ -12,11 +12,15 @@ const RatingCard = ({ id, name, rating, comment, avatar }: Props) => {
   return (
     <div
       key={id}
-      className="flex h-full flex-col justify-between rounded-lg bg-gray-50 p-6 shadow-md transition-all hover:shadow-lg"
+      className="flex h-full flex-col justify-between rounded-lg bg-gray-50 p-6 shadow-md transition-all hover:shadow-xl"
     >
       <div className="mb-4 flex items-center gap-4">
-        <div className="relative h-12 w-12 overflow-hidden rounded-full">
-          <img src={avatar} alt={name} className="object-cover" />
+        <div className="relative h-12 w-12 overflow-hidden rounded-full bg-gray-300">
+          <img
+            src={avatar === "" ? "/icons/default-account.svg" : avatar}
+            alt={name}
+            className="object-cover"
+          />
         </div>
         <div>
           <h4 className="font-semibold text-gray-900">{name}</h4>

@@ -9,14 +9,14 @@ const RatingSection = () => {
       rating: 5,
       comment:
         "Amazing quality and comfort! These are the best shoes I have ever owned.",
-      avatar: "/images/bg-hero1.jpeg",
+      avatar: "",
     },
     {
       id: 2,
       name: "Jane Smith",
       rating: 5,
       comment: "Perfect fit and great style. Highly recommend to everyone!",
-      avatar: "/images/bg-hero2.png",
+      avatar: "",
     },
     {
       id: 3,

@@ -220,7 +220,7 @@ export default function CardSlider({
     >
       {/* SLIDER */}
       <div
-        className="flex"
+        className="flex py-4"
         style={{
           transform: `translateX(calc(-${(currentIndex * 100) / currentSlidesToShow}% + ${dragOffset}px))`,
           transition: enableTransition
